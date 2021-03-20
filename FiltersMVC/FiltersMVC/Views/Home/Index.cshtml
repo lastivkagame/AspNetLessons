@@ -1,0 +1,50 @@
+﻿@using System.Web.Optimization
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+    @Styles.Render("~/styles/main")
+    @Scripts.Render("~/script/custom")
+
+    <Header>
+        <h1>Index page<span id="badge" class="badge badge-secondary"></span></h1>
+        <h2>Hello, @User.Identity.Name</h2>
+    </Header>
+    <section id="myloginblock" class="d-flex">
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <button data-href="@Url.Action("SignOut", "Home")"
+                    id="mybtn_signout" onclick="MyDoSignOut(this)" class="btn btn-primary m-4">
+                Sign Out
+            </button>
+
+        }
+
+        <section id="mylogin_signin" class="d-none">
+            <button onclick="MyDoSignIn()" class="btn btn-primary m-4"><i class="fas fa-sign-in-alt"></i>Sign In</button>
+            <button onclick="MyDoSignRegistre()" class="btn btn-primary  m-4">Registrate</button>
+        </section>
+    </section>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        @*<button class="btn btn-primary" data-href="@Url.Action("GetInfo")" onclick="workModule.onGetStateClick(this)">OK</button>*@
+        <button class="btn btn-primary"
+                data-href="@Url.Action("GetInfo", "Home")"
+                onclick="workModule.onGetStateClick(this)">
+            OK
+        </button>
+    }
+
+</body>
+</html>
